@@ -46,6 +46,31 @@ public class test {
         assert(volvo.getCurrentSpeed() > 0.0);
     }
 
+
+    /**
+     * test för antal dörrar
+     */
+    @Test
+    public void testNrDoors() {
+        assert(saab.getNrDoors() == 2 && volvo.getNrDoors() == 4);
+    }
+
+    /**
+     * Testar enginepower
+     */
+    @Test
+    public void testEnginePower() {
+        assert (saab.getEnginePower() == 125 && volvo.getEnginePower() == 100);
+    }
+
+    /**
+     * Test för color
+     */
+    @Test
+    public void testColor() {
+        assert (saab.getColor() == Color.red && volvo.getColor() == Color.black );
+    }
+
     /**
      * Testar om gas metoden kan anta värden högre än 1.0, om den inte kan det,
      * innebär det att metoden aldrig anropas och bilen ges aldrig någon fart, alltså currentSpeed == 0.
@@ -121,6 +146,14 @@ public class test {
         volvo.startEngine();
         volvo.brake(0.05);
         assert(volvo.getCurrentSpeed() != 0.0);
+    }
+
+
+    @Test
+    public void testBrakeSufficient(){
+        volvo.startEngine();
+        volvo.brake(0.1);
+        assert(volvo.getCurrentSpeed() == 0.0);
     }
 
 
