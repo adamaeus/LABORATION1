@@ -10,19 +10,10 @@ public class Main {
  */
         Volvo240 volvo240 = new Volvo240();
 
-
-
-        /*
-        System.out.println( "X           Y");
-        System.out.println("----------------");
-
-
-        //driveCar(volvo240);
-        //turnCar(volvo240);
-
-*/
-
-
+        /**
+         * metod för att köra bilen.
+         */
+        driveCar(volvo240);
 
 
     }
@@ -39,18 +30,6 @@ public class Main {
 
         }
     }
-
-    // ANVÄNDER SIG AV (condition) ? expression1 : expression2;
-    /*
-    public static void printCoordinates(Vehicle car){
-        System.out.println((car.direction == Directions.DOWN || car.direction == Directions.UP) ? "           " + ((double) Math.round(car.getY())) : (((double) Math.round(car.getX()) + "           ")));
-    }
-
-
-    public static void printCoordinates(Vehicle car){
-    System.out.println((car.direction == Directions.DOWN || car.direction == Directions.UP) ? "           " + car.getY() : car.getX() + "           ");
-}
-     */
     /**
      * Metod för att köra bilen. En scanner kallar på input, vilken riktning vi vill köra.
      * Riktningen sätts som lika med directions från ENUM. Därefter aktiveras move och
@@ -61,35 +40,13 @@ public class Main {
     public static void driveCar (Vehicle car){
         Scanner scanner = new Scanner(System.in);
         car.startEngine();
-        System.out.println("Direction to drive " + car + "   ?  ");
+        System.out.println("Direction to drive " + car.GetModelName() + "?  ");
         car.direction = Directions.valueOf(scanner.next());
         for (double i = 0; i <1 ; i+=0.1 ){
         car.move();
         car.gas(i);
         printCoordinates(car);
-        }
+        }}
     }
 
-    /*
-    public static void turnCar(Vehicle car){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Where to turn? ");
-        car.direction = Directions.valueOf(scanner.next());
-            if (Directions.valueOf(scanner.next()) == Directions.RIGHT){
-                car.turnRight();
-                printCoordinates(car);
-            }else if (Directions.valueOf(scanner.next()) == Directions.LEFT){
-                car.turnLeft();
-                printCoordinates(car);
-            }
-        System.out.println("Wrong input ");
-    }
-*/
 
-
-
-
-
-
-
-}

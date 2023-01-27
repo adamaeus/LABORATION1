@@ -23,8 +23,11 @@ public abstract class Vehicle implements Movable {
         this.modelName = modelName;
     }
 
-    private String GetmodelName() { return modelName; }
-    // CAR METHODS.
+    /**
+     * metod för att anropa modelName i main
+     * @return
+     */
+    public String GetModelName() { return modelName; }
 
     /**
      * Metod för att starta motorn, currentSpeed sätts till 0.1
@@ -42,8 +45,8 @@ public abstract class Vehicle implements Movable {
 
 
     /**
-     *
-     * @return  ????????????????????????????????
+     * Abstrakt metod för att impolementera classernas speedFactor
+     * @return
      */
     public abstract double speedFactor();
 
@@ -83,8 +86,11 @@ public abstract class Vehicle implements Movable {
      */
     private double currentSpeed = Math.max(0, Math.min(getCurrentSpeed(), GetEnginePower()));
 
-
-
+    /**
+     * Get enginPower metod enbart för att kunna använda den i currentspeed.
+     * @return
+     */
+    private double GetEnginePower() { return enginePower; }
 
 
     /**
@@ -110,21 +116,26 @@ public abstract class Vehicle implements Movable {
     private void setColor(Color clr) {
         color = clr;
     }
-    private double GetEnginePower() { return enginePower; }
 
 
 
+    /**
+     * Metod för att få bilen att anta en viss hastighet. Gas skickar amount till incrementSpeed som är metoden för att öka hastigheten.
+     * @param amount
+     */
 
-
-    // DRIVE
-    // TODO fix this method according to lab pm
     public void gas(double amount) {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
         }
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * Metod för att minska farten, vid anrop anges ett amount som sedan skickas till decrementSpeed,
+     * hastighet avtar enligt kalkyl i sistnämnda metod och amount.
+     * @param amount
+     */
+
     public void brake(double amount){
         if (amount >= 0 && amount <= 1){
             decrementSpeed(amount);
