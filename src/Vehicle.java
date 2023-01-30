@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Scanner;
 
 
 /**
@@ -9,22 +10,44 @@ import java.awt.*;
  */
 public abstract class Vehicle implements Movable {
 
-    /**
-     * Constructor för ett Fordon. Samtliga parametrar tas in av bägge fordon.
-     * @param nrDoors antal dörrar för fordonet
-     * @param color vilken färg bilen ska ha
-     * @param enginePower hur stark motor fordonet ska ha (maxfart)
-     * @param modelName vilket modelnamn (enkel string).
-     */
-    public Vehicle(int nrDoors, Color color, double enginePower, String modelName) {
+    public Vehicle(String modelName, int nrDoors, double enginePower, Color color, double weight) {
+        this.modelName = modelName;
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
-        this.modelName = modelName;
+        this.weight = weight;
     }
 
-    private String GetmodelName() { return modelName; }
-    // CAR METHODS.
+    // PROBLEM, ALLA OBJECT AV CARS FÅR VIKTEN 2000 (SOM I TRUCK).
+    private static double weight;
+    private Color color;
+    private final String modelName;
+    private final int nrDoors;
+    private static  double enginePower;
+    private static double currentSpeed;
+
+
+
+    public String getModelName() { return modelName; }
+    public int getNrDoors() {
+        return nrDoors;
+    }
+    public Color getColor() {
+        return color;
+    }
+    public static double getWeight() {return weight;}
+
+    public static double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    public static double getEnginePower() { return enginePower; }
+
+
+    private void setColor(Color clr) {color = clr;}
+
+
+
 
     /**
      * Metod för att starta motorn, currentSpeed sätts till 0.1
@@ -41,10 +64,6 @@ public abstract class Vehicle implements Movable {
     }
 
 
-    /**
-     *
-     * @return  ????????????????????????????????
-     */
     public abstract double speedFactor();
 
     /**
@@ -55,7 +74,7 @@ public abstract class Vehicle implements Movable {
      * @param amount mängd som vi ökar farten med.
      */
     private void incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
     }
 
     /**
@@ -68,63 +87,20 @@ public abstract class Vehicle implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
 
-
-    /**
-     * Parametrar för värden till konstruktorn.
-     */
-
-    private Color color; // Color of the car
-    private final String modelName;
-
-    private final int nrDoors; // Number of doors on the car
-    private final double enginePower; // Engine power of the car
     /**
      * Endast en försäkring om att currentSpeed aldrig överstiger 100, utanför incrementSpeed som redan har denna spärr.
      */
-    private double currentSpeed = Math.max(0, Math.min(getCurrentSpeed(), GetEnginePower()));
 
 
 
 
 
-    /**
-     * Getters för de olika variablarna
-     * @return
-     */
-    public int getNrDoors() {
-        return nrDoors;
-    }
-    public double getEnginePower() {
-        return enginePower;
-    }
-    public Color getColor() {
-        return color;
-    }
-    /**
-     * Gettermetod för currentSpeed, används i test och move/turn metodsimplementation i main.
-     * @return
-     */
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
-    private void setColor(Color clr) {
-        color = clr;
-    }
-    private double GetEnginePower() { return enginePower; }
-
-
-
-
-
-    // DRIVE
-    // TODO fix this method according to lab pm
     public void gas(double amount) {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
         }
     }
 
-    // TODO fix this method according to lab pm
     public void brake(double amount){
         if (amount >= 0 && amount <= 1){
             decrementSpeed(amount);
@@ -190,6 +166,33 @@ public abstract class Vehicle implements Movable {
             case DOWN -> y = y - currentSpeed;
         }
 
+    }
+
+
+
+
+
+    public static void printCoordinates (Vehicle vehicle){
+        System.out.println((vehicle.direction == Directions.DOWN || vehicle.direction == Directions.UP) ? "           " + vehicle.getY() : vehicle.getX() + "           ");
+    }
+
+    /**
+     * Metod för att köra bilen. En scanner kallar på input, vilken riktning vi vill köra.
+     * Riktningen sätts som lika med directions från ENUM. Därefter aktiveras move och
+     * gas som kör bilen i riktningen, medans metoden printCoordinates printar koordinaterna
+     * längs körsträckan så att vi ser vart bilen kör.
+     */
+
+    public static void driveVehicle(Vehicle vehicle){
+        Scanner scanner = new Scanner(System.in);
+        vehicle.startEngine();
+        System.out.println("Direction to drive " + vehicle.getModelName() + "   ?  ");
+        vehicle.direction = Directions.valueOf(scanner.next());
+        for (double i = 0; i < 1; i += 0.1) {
+            vehicle.move();
+            vehicle.gas(i);
+            printCoordinates(vehicle);
+        }
     }
 }
 

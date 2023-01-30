@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * Klass för byggandet av en Saab95.
  */
-public class Saab95 extends Vehicle{
+public class Saab95 extends Car{
 
     /**
      * Saab95 kommer med turbo, en parameter deklareras här för turbo, som antingen kan vara på eller av.
@@ -15,7 +15,7 @@ public class Saab95 extends Vehicle{
      * "turboOn".
      */
     public Saab95(){
-        super(4, Color.RED, 125, "Saab95");
+        super("Saab95", 2, 125, Color.RED);
         turboOn = false;
         stopEngine();
     }

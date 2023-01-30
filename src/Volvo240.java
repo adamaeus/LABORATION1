@@ -4,7 +4,7 @@ import java.awt.*;
 /**
  * Bilklass för Volvo.
  */
-public class Volvo240 extends Vehicle {
+public class Volvo240 extends Car{
 
     /**
      * Klassbunden "permanent" variabel som gör anspråk vid klassens metod för att beräkna hastighetsfaktorn.
@@ -15,7 +15,7 @@ public class Volvo240 extends Vehicle {
      * konstruktor av volvo, anropar superkonstruktorn i superklassen vehicle.
      */
     public Volvo240() {
-        super(4, Color.BLACK, 100, "Volvo240");
+        super("Volvo240", 4, 100, Color.BLACK);
         stopEngine();
     }
 
