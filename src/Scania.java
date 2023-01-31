@@ -27,20 +27,19 @@ public class Scania extends Truck {
         }
     }
 
-
-    public void load(Car car) {
-        flak.load(flak, car);
+    public void displayCargoInformation() {
+        flak.displayCargoInformation(flak);
     }
 
-    public void unLoad() {
-        flak.unLoad(flak);
+
+    public void load(TruckBed truckBed, Car car) {
+        flak.load(truckBed, car);
     }
 
-    /*
-            public void displayCurrentLoad() {
-                flak.displayCurrentLoad(flak);
-            }
-        */
+    public void unLoad(TruckBed truckBed) {
+        flak.unLoad(truckBed);
+    }
+
     @Override
     public double speedFactor() {
         return 0;

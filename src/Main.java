@@ -9,43 +9,54 @@ public class Main {
         //System.out.println( "X           Y");
         //System.out.println("----------------");
 
+        /**
+         * CARS
+         */
         Volvo240 volvo240 = new Volvo240();
         Saab95 saab95 = new Saab95();
-        volvo240.driveVehicle(volvo240);
+        Volvo240 volvo01 = new Volvo240();
+
+
+        /**
+         * Trucks
+         */
+        Trailer trailer = new Trailer();
         Scania scania = new Scania();
 
-        Scania.driveVehicle(scania);
+        /**
+         * Drive method
+         */
+        //Scania.driveVehicle(scania);
+        //volvo240.driveVehicle(volvo240);
 
 
-        Trailer trailer = new Trailer();
+        /**
+         * Open ramp / flak
+         */
 
-        scania.tiltFlak(10.0);
-        trailer.openRamp(1);
+        //scania.tiltFlak(80.0);
+        //trailer.openRamp(1);
 
 
-        scania.load(saab95);
-        scania.unLoad();
+        /**
+         * Load / unLoad methods
+         */
 
-        // Behöver HJÄLP med displayCurrentLoad (generalisering, Truck class, ej behöva mata in parameter).
-        //scania.displayCurrentLoad();
-        //trailer.displayCurrentLoad();
+        scania.load(scania.flak, saab95);
+        scania.load(scania.flak, volvo01);
+        scania.load(scania.flak, volvo240);
 
-        ArrayList<Car> cars = new ArrayList<>();
-        cars.add(volvo240);
-        cars.add(saab95);
-        cars.remove(saab95);
-        double combinedWeight = Volvo240.getWeight() + Saab95.getWeight();
-        if (combinedWeight < 1000) {
-            System.out.println(combinedWeight);
-        } else {
-            System.out.println("too heavy load");
-        }
+        scania.unLoad(scania.flak);
+        scania.unLoad(scania.flak);
+        scania.unLoad(scania.flak);
+
+        trailer.load(trailer.ramp, saab95);
+        trailer.load(trailer.ramp, volvo01);
+        trailer.unLoad(trailer.ramp);
+        trailer.displayCargoInformation();
+
 
     }
 
-        /**
-         * Metod för att printa ut koordinaterna bilen förflyttas i på X och Y axlarna.
-         * @param car any objekt from the class Vehicle.
-         */
 
     }

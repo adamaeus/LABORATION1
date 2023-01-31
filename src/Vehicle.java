@@ -18,35 +18,21 @@ public abstract class Vehicle implements Movable {
         this.weight = weight;
     }
 
-    // PROBLEM, ALLA OBJECT AV CARS FÅR VIKTEN 2000 (SOM I TRUCK).
-    private static double weight;
-    private Color color;
+    private final double weight;
+    private final Color color;
     private final String modelName;
     private final int nrDoors;
-    private static  double enginePower;
+    private final double enginePower;
     private static double currentSpeed;
 
 
 
     public String getModelName() { return modelName; }
-    public int getNrDoors() {
-        return nrDoors;
-    }
-    public Color getColor() {
-        return color;
-    }
-    public static double getWeight() {return weight;}
-
-    public static double getCurrentSpeed() {
-        return currentSpeed;
-    }
-
-    public static double getEnginePower() { return enginePower; }
-
-
-    private void setColor(Color clr) {color = clr;}
-
-
+    public int getNrDoors() {return nrDoors;}
+    public Color getColor() {return color;}
+    public double getWeight() {return weight;}
+    public static double getCurrentSpeed() {return currentSpeed;}
+    public double getEnginePower() { return enginePower; }
 
 
     /**
@@ -62,7 +48,6 @@ public abstract class Vehicle implements Movable {
     public void stopEngine() {
         currentSpeed = 0;
     }
-
 
     public abstract double speedFactor();
 
@@ -90,9 +75,6 @@ public abstract class Vehicle implements Movable {
     /**
      * Endast en försäkring om att currentSpeed aldrig överstiger 100, utanför incrementSpeed som redan har denna spärr.
      */
-
-
-
 
 
     public void gas(double amount) {
@@ -172,9 +154,8 @@ public abstract class Vehicle implements Movable {
 
 
 
-    public static void printCoordinates (Vehicle vehicle){
-        System.out.println((vehicle.direction == Directions.DOWN || vehicle.direction == Directions.UP) ? "           " + vehicle.getY() : vehicle.getX() + "           ");
-    }
+
+
 
     /**
      * Metod för att köra bilen. En scanner kallar på input, vilken riktning vi vill köra.
@@ -193,6 +174,14 @@ public abstract class Vehicle implements Movable {
             vehicle.gas(i);
             printCoordinates(vehicle);
         }
+    }
+
+    /**
+     * Helper method for DriveCar. to print in "console".
+     * @param vehicle
+     */
+    public static void printCoordinates (Vehicle vehicle){
+        System.out.println((vehicle.direction == Directions.DOWN || vehicle.direction == Directions.UP) ? "           " + vehicle.getY() : vehicle.getX() + "           ");
     }
 }
 

@@ -2,11 +2,10 @@ import java.awt.*;
 
 public class Truck extends Vehicle {
 
-    private static final double weight = 2000;
-
-
+    // UPDATED 30/1.
+    // WEIGHT SET IN SUPER CONSTRUCTOR
     public Truck(String modelName, int nrDoors, double enginePower, Color color) {
-        super(modelName, nrDoors, enginePower, color, weight);
+        super(modelName, nrDoors, enginePower, color, 2000);
     }
 
     @Override
