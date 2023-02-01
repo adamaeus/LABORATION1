@@ -1,36 +1,46 @@
 import java.awt.*;
 
 
-
-
 public class Trailer extends Truck {
 
-
-    TruckBed ramp = new TruckBed(4000,  1, "RAMP");
+    TruckBed trailerRamp = new TruckBed(4000,  1, "RAMP");
 
     public Trailer() {
         super("Trailer", 2, 450, Color.RED);
     }
 
 
+    public double getCurrentLoad() {
+        return trailerRamp.getCurrentLoad();
+    }
+
     public void openRamp (int amount) {
         stopEngine();
-        if (Trailer.getCurrentSpeed() == 0) {
-            ramp.truckBedLiftOperator(ramp, amount);
+        trailerRamp.openRamp(amount);
+        }
+
+    public void closeRamp(){
+        trailerRamp.closeRamp();
+    }
+    public void getCurrentAngle(){
+        trailerRamp.getCurrentAngle();
+    }
+    public void load(Car car) {
+        if (carVicinity(car)) {
+            trailerRamp.load(car);
+        } else {
+            System.out.println("CAR NOT IN REACH");
         }
     }
+    public void unLoad() {
+        trailerRamp.unLoad();
 
-    public void load(TruckBed truckBed, Car car) {
-        ramp.load(truckBed, car);
-    }
-
-    public void unLoad(TruckBed truckBed) {
-        ramp.unLoad(truckBed);
     }
 
     public void displayCargoInformation() {
-        ramp.displayCargoInformation(ramp);
+        trailerRamp.displayCargoInformation();
     }
+
 
 
 

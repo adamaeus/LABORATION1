@@ -3,7 +3,7 @@ import java.awt.*;
 public class Scania extends Truck {
 
 
-    TruckBed flak = new TruckBed(1000, 70.0, "FLAK");
+    TruckBed scaniaFlak = new TruckBed(1000, 70.0, "FLAK");
 
 
     public Scania() {
@@ -20,26 +20,23 @@ public class Scania extends Truck {
 
     // Inte nöjd med denna metoden, behöver mata in flak parameter, redundant. Samt metoden finns exakt lika
     // i trailer classen, blir copy code.
-    public void tiltFlak(double amount) {
+
+    public void openRamp(double amount) {
         stopEngine();
         if (Scania.getCurrentSpeed() == 0) {
-            flak.truckBedLiftOperator(flak, amount);
+            scaniaFlak.openRamp(amount);
         }
     }
 
     public void displayCargoInformation() {
-        flak.displayCargoInformation(flak);
+        scaniaFlak.displayCargoInformation();
     }
-
-
-    public void load(TruckBed truckBed, Car car) {
-        flak.load(truckBed, car);
+    public void load(Car car) {
+        scaniaFlak.load(car);
     }
-
-    public void unLoad(TruckBed truckBed) {
-        flak.unLoad(truckBed);
+    public void unLoad() {
+        scaniaFlak.unLoad();
     }
-
     @Override
     public double speedFactor() {
         return 0;

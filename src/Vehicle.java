@@ -97,11 +97,19 @@ public abstract class Vehicle implements Movable {
     public double getX (){return x;}
     public double getY(){return y;}
 
+
+    public void setX(double x) {
+        this.x = x;
+    }
+    public void setY(double y) {
+        this.y = y;
+    }
     /**
      * Värden på vår fiktiva X och Y axel
      */
-    private double x = 0.0;
-    private double y = 0.0;
+    // 31/01. GAVE PUBLIC
+    public double x = 0.0;
+    public double y = 0.0;
 
 
     /**
@@ -151,6 +159,9 @@ public abstract class Vehicle implements Movable {
     }
 
 
+    public void displayCoordinates(){
+        System.out.println(getY() + getX());
+    }
 
 
 
@@ -164,25 +175,23 @@ public abstract class Vehicle implements Movable {
      * längs körsträckan så att vi ser vart bilen kör.
      */
 
-    public static void driveVehicle(Vehicle vehicle){
-        Scanner scanner = new Scanner(System.in);
-        vehicle.startEngine();
-        System.out.println("Direction to drive " + vehicle.getModelName() + "   ?  ");
-        vehicle.direction = Directions.valueOf(scanner.next());
-        for (double i = 0; i < 1; i += 0.1) {
-            vehicle.move();
-            vehicle.gas(i);
-            printCoordinates(vehicle);
-        }
+
+
+
+    public void drive(double x, double y) {
+        setX(x);
+        setY(y);
+        move();
+        gas(1.0);
+        printCoordinates();
     }
 
-    /**
-     * Helper method for DriveCar. to print in "console".
-     * @param vehicle
-     */
-    public static void printCoordinates (Vehicle vehicle){
-        System.out.println((vehicle.direction == Directions.DOWN || vehicle.direction == Directions.UP) ? "           " + vehicle.getY() : vehicle.getX() + "           ");
+
+    public void printCoordinates(){
+        System.out.println("DROVE " + getModelName() + " TO: " + "X -> " + getX() + "   " + "Y -> " + getY());
     }
+
+
 }
 
 

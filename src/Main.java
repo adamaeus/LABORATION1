@@ -34,7 +34,7 @@ public class Main {
          * Open ramp / flak
          */
 
-        //scania.tiltFlak(80.0);
+        //scania.tiltFlak(70.0);
         //trailer.openRamp(1);
 
 
@@ -42,21 +42,17 @@ public class Main {
          * Load / unLoad methods
          */
 
-        scania.load(scania.flak, saab95);
-        scania.load(scania.flak, volvo01);
-        scania.load(scania.flak, volvo240);
-
-        scania.unLoad(scania.flak);
-        scania.unLoad(scania.flak);
-        scania.unLoad(scania.flak);
-
-        trailer.load(trailer.ramp, saab95);
-        trailer.load(trailer.ramp, volvo01);
-        trailer.unLoad(trailer.ramp);
-        trailer.displayCargoInformation();
 
 
+
+        trailer.openRamp(1);
+        trailer.load(volvo240);
+        trailer.load(volvo01);
+        trailer.closeRamp();
+        trailer.drive(5.0, 7.0);
+        trailer.unLoad();
+
+        volvo240.drive(5.0, 7.0);
+        volvo240.displayCoordinates();
     }
-
-
-    }
+}

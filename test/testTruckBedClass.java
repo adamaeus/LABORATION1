@@ -26,8 +26,8 @@ public class testTruckBedClass {
     public void before(){
         flak = new TruckBed(1000, 70.0, "FLAK");
         ramp = new TruckBed(4000, 1, "RAMP");
-        flak.getCurrentLoad(flak);
-        ramp.getCurrentLoad(ramp);
+        flak.getCurrentLoad();
+        ramp.getCurrentLoad();
         volvoTest02 = new Volvo240();
         saabTest02 = new Saab95();
     }
@@ -70,7 +70,7 @@ public class testTruckBedClass {
      */
     @Test
     public void testCurrentLoad(){
-       assert(flak.getCurrentLoad(flak) == 0.0);
+       assert(flak.getCurrentLoad() == 0.0);
     }
 
 
