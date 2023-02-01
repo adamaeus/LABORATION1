@@ -47,6 +47,27 @@ public class TruckBed implements Loadable{
 
 
 
+    public double getX (){return x;}
+    public double getY(){return y;}
+    public void setX(double x) {
+        this.x = x;
+    }
+    public void setY(double y) {
+        this.y = y;
+    }
+    /**
+     * Värden på vår fiktiva X och Y axel
+     */
+    // 31/01. GAVE PUBLIC
+    public double x;
+    public double y;
+
+    public void setCoordinates (){
+        setX() = Truck.getX();
+
+    }
+
+
 
     // STACKS. WORK IN PROGRESS, EACH TRUCKBED THEIR OWN.
 
@@ -80,6 +101,8 @@ public class TruckBed implements Loadable{
             currentAngle = 0;
             out.println(currentAngle);
             out.println((getBedType() + " IS CLOSED. LOADING PROCEDURE TERMINATED"));
+        } else {
+            System.out.println("TRUCK IS MOVING");
         }
     }
     public void decrementAngle(double amount) {
@@ -158,9 +181,10 @@ lastLoaded.setX(5);
         loadedCars.pop();
         out.println("UNLOADED " + lastLoaded.getModelName() + " FROM " + getBedType());
         out.println(lastLoaded);
-        Truck.carUnLoadedHelper(lastLoaded);
 
     }
+
+
 
 
 }

@@ -12,6 +12,8 @@ public class Car extends Vehicle{
     }
 
 
+
+
     public double getX (){return x;}
     public double getY(){return y;}
 

@@ -45,14 +45,9 @@ public class Main {
 
 
 
-        trailer.openRamp(1);
-        trailer.load(volvo240);
-        trailer.load(volvo01);
-        trailer.closeRamp();
-        trailer.drive(5.0, 7.0);
-        trailer.unLoad();
 
-        volvo240.drive(5.0, 7.0);
-        volvo240.displayCoordinates();
+
+        trailer.drive2(2, 3);
+
     }
 }

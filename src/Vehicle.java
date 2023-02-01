@@ -178,16 +178,33 @@ public abstract class Vehicle implements Movable {
 
 
 
-    public void drive(double x, double y) {
-        setX(x);
-        setY(y);
-        move();
-        gas(1.0);
-        printCoordinates();
+
+    public void driveVehicle(double amount){
+        Scanner scanner = new Scanner(System.in);
+        startEngine();
+        System.out.println("Direction to drive " + getModelName() + " ? ");
+        direction = Directions.valueOf(scanner.next());
+        for (double i = 0; i < amount; i += 0.1) {
+            move();
+            gas(1.0);
+            printCoordinates();
+        }
+
+    }
+
+    public void drive2(double x, double y) {
+        for (double xi = 0; xi < x; x+=0.1){
+            for(double yi = 0; yi < y; y++){
+                move();
+                gas(0.1);
+                printCoordinates();
+            }
+        }
     }
 
 
     public void printCoordinates(){
+
         System.out.println("DROVE " + getModelName() + " TO: " + "X -> " + getX() + "   " + "Y -> " + getY());
     }
 
