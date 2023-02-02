@@ -1,30 +1,40 @@
 import java.awt.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 
 public class Trailer extends Truck {
 
-    TruckBed trailerRamp = new TruckBed(4000,  1, "RAMP");
+    TruckBed trailerRamp = new TruckBed(4000, 1, "RAMP");
 
     public Trailer() {
         super("Trailer", 2, 450, Color.RED);
     }
 
 
+
+    double trailerWeight = trailerRamp.getCarryCapacity() * 0.001;
+    @Override
+    public double speedFactor() {
+        return (getEnginePower() * 0.01 - trailerWeight);
+    }
     public double getCurrentLoad() {
         return trailerRamp.getCurrentLoad();
     }
 
-    public void openRamp (int amount) {
+    public void openRamp(int amount) {
         stopEngine();
         trailerRamp.openRamp(amount);
-        }
+    }
 
-    public void closeRamp(){
+    public void closeRamp() {
         trailerRamp.closeRamp();
     }
-    public void getCurrentAngle(){
+
+    public void getCurrentAngle() {
         trailerRamp.getCurrentAngle();
     }
+
     public void load(Car car) {
         if (carVicinity(car)) {
             trailerRamp.load(car);
@@ -33,10 +43,12 @@ public class Trailer extends Truck {
             System.out.println("CAR NOT IN REACH");
         }
     }
+
     public void unLoad() {
         trailerRamp.unLoad();
 
     }
+
     public void displayCargoInformation() {
         trailerRamp.displayCargoInformation();
     }
@@ -44,6 +56,7 @@ public class Trailer extends Truck {
     public void carCoordinatesTruck(Car car) {
         car.setY(getY());
         car.setX(getX());
+        trailerRamp.setCoordinates();
     }
 
 

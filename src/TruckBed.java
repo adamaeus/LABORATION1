@@ -5,10 +5,9 @@ import java.util.Deque;
 import static java.lang.System.out;
 
 
-/**
- * Class TruckBed. TruckBed regarded as separate object for object delegation.
- */
-public class TruckBed implements Loadable{
+
+public class TruckBed implements Loadable <Car> {
+    Display truckBedDisplay = new Display();
 
     public TruckBed(double carryCapacity, double maxAngle, String bedType) {
         this.carryCapacity = carryCapacity;
@@ -16,20 +15,10 @@ public class TruckBed implements Loadable{
         this.bedType = bedType;
     }
 
-    /**
-     * Bedtype, only currently viable for correct display in console for program run.
-     */
+
+
     private final String bedType;
-
-    /**
-     * carryCapacity, important parameter for a TruckBed.
-     */
     private final double carryCapacity;
-
-    /**
-     * Max Angle, applied when creating the truckBed, could be used as a final in each truck, however important for correct
-     * method calculations in operating methods.
-     */
     private final double maxAngle;
     private double currentLoad;
     private double currentAngle;
@@ -43,6 +32,10 @@ public class TruckBed implements Loadable{
     public double getCarryCapacity() {return carryCapacity;}
     public String getBedType() {return bedType;}
 
+    public double getCurrentLoad() {
+        return (currentLoad = loadedCars.size() * 700);
+    }
+
 
 
 
@@ -55,35 +48,31 @@ public class TruckBed implements Loadable{
     public void setY(double y) {
         this.y = y;
     }
-    /**
-     * Värden på vår fiktiva X och Y axel
-     */
-    // 31/01. GAVE PUBLIC
+
+
+
+
+
     public double x;
     public double y;
-
     public void setCoordinates (){
-        setX() = Truck.getX();
-
+        setX(x);
+        setY(y);
     }
-
-
-
-    // STACKS. WORK IN PROGRESS, EACH TRUCKBED THEIR OWN.
-
-    Deque<Car> cargoFlak = new ArrayDeque<>();
-    Deque<Car> cargoRamp = new ArrayDeque<>();
     Deque<Car> loadedCars = new ArrayDeque<>();
 
 
 
-    // ----------------------- WORKING METHODS --------------------------\\
+
+
+    // ------------------------- RAMP METHODS ----------------------------\\
+
 
 
     public void openRamp(double amount) {
     if (amount >= 0.0 && amount <= getMaxAngle() && Truck.getCurrentSpeed() == 0.0) {
         incrementAngle(amount);
-        } else { out.println("ANGLE INPUT UNREACHABLE");}
+        } else {truckBedDisplay.angleInputOutOfReach();}
     }
     //displayCurrentAngle(amount);
     public void incrementAngle(double amount) {
@@ -95,7 +84,6 @@ public class TruckBed implements Loadable{
             }
         }
     }
-
     public void closeRamp () {
         if (Trailer.getCurrentSpeed() == 0) {
             currentAngle = 0;
@@ -109,15 +97,51 @@ public class TruckBed implements Loadable{
         currentAngle = Math.max(getCurrentAngle() - amount, 70);
     }
 
-    /*public void displayCurrentAngle(Double amount) {
-        double k;
-        out.println("Current angle of " + getBedType());
-        for (k = 0.0; k <= amount; k += 1) {
-            out.println(k);
+
+
+
+    // ----------------------- LOAD & UNLOAD METHODS --------------------------\\
+
+
+
+    public void load(Car car) {
+        loadHelper(car);
+    }
+
+    public void loadHelper (Car car){
+        if(isLoadable(car)) {
+            setCoordinates();
+            loadCar(car);
+            displayCargoInformation();
+        }else{
+            out.println("ERROR. COULD NOT LOAD  " + car.getModelName() +" -> " + getBedType());
         }
     }
-*/
-    //DISPLAYER, HELPER. NOTE -> CHANGE STACK!
+    private boolean isLoadable (Car car) {
+        return  (getCurrentAngle() == getMaxAngle() &&
+                (carryCapacity - getCurrentLoad()) > car.getWeight());
+    }
+
+    public void loadCar(Car car){
+        loadedCars.push(car);
+        currentLoad = currentLoad + car.getWeight();
+    }
+
+    public void unLoad() {
+        Car lastLoaded = loadedCars.peek();
+        loadedCars.pop();
+        out.println("UNLOADED " + lastLoaded.getModelName() + " FROM " + getBedType());
+        out.println(lastLoaded);
+        setCoordinates();
+
+    }
+
+
+
+
+    // ----------------------- DISPLAYER METHODS --------------------------\\
+
+
     public void displayCargoInformation (){
         Car lastLoaded = loadedCars.peek();
         out.println("LOADED " + lastLoaded.getModelName() + " to " + getBedType());
@@ -126,63 +150,6 @@ public class TruckBed implements Loadable{
         out.println(" ");
     }
 
-    // CURRENT LOAD METHOD.
-    public double getCurrentLoad() {
-        return (currentLoad = loadedCars.size() * 700);
-    }
-
-
-
-    // ----------------------- NON - WORKING METHODS --------------------------\\
-
-
-    // TODO. HELPER METHODS:
-
-    public boolean isTruckBedOpen (){
-        return getCurrentAngle() == getMaxAngle();}
-
-    private boolean isCargoCapacityFull (Car car){
-        return (carryCapacity - getCurrentLoad()) > car.getWeight();}
-
-    private boolean isLoadable (Car car) {
-        return  (getCurrentAngle() == getMaxAngle() &&
-                (carryCapacity - getCurrentLoad()) > car.getWeight());
-    }
-
-    public void load(Car car) {
-        loadHelper(car);
-    }
-    public void loadHelper (Car car){
-        if(isLoadable(car)) {
-            loadCar(car);
-            displayCargoInformation();
-        }else{
-            out.println("ERROR. COULD NOT LOAD  " + car.getModelName() +" -> " + getBedType());
-        }
-    }
-
-    public void loadCar(Car car){
-        loadedCars.push(car);
-        currentLoad = currentLoad + car.getWeight();
-    }
-
-
-
-/*
-lastLoaded.setX(5);
-        lastLoaded.setY(4);
- */
-
-    // unload helper. Setters for Y and X
-
-
-    public void unLoad() {
-        Car lastLoaded = loadedCars.peek();
-        loadedCars.pop();
-        out.println("UNLOADED " + lastLoaded.getModelName() + " FROM " + getBedType());
-        out.println(lastLoaded);
-
-    }
 
 
 

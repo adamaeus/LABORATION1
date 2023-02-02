@@ -10,12 +10,12 @@ public  class Truck extends Vehicle {
 
 
     @Override
-    public double speedFactor()  {
-        return getEnginePower() * 0.01;
+    public double speedFactor() {
+        return 0;
     }
 
     public boolean carVicinity(Car car){
-        return Math.abs(car.getX() - getX()) <= 3 && (Math.abs(car.getY() - getY()) <= 3);
+        return Math.abs(car.getX() - getX()) <= 5.0 && (Math.abs(car.getY() - getY()) <= 5.0);
 
     }
 
