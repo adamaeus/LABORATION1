@@ -19,9 +19,9 @@ public  class Truck extends Vehicle {
 
     }
 
-    public void carUnLoadedHelper(Car car){
-       car.setY(getY());
-       car.setX(getX());
+    public void carUnLoadedHelper(TruckBed truckBed){
+       truckBed.setY(getY());
+       truckBed.setX(getX());
     }
     public void openRamp(double amount){};
 

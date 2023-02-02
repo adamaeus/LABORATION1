@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -19,15 +18,13 @@ public class Main {
         //volvo240.driveVehicle(volvo240);
 
 
-
         //scania.tiltFlak(70.0);
         //trailer.openRamp(1);
 
 
+        CarShop<Volvo240> VolvoCarshop = new CarShop<>();
 
-        CarShop <Volvo240> VolvoCarshop = new CarShop<>();
-
-        CarShop <Saab95> SaabCarshop = new CarShop<>();
+        CarShop<Saab95> SaabCarshop = new CarShop<>();
 
         VolvoCarshop.load(volvo01);
 
@@ -35,13 +32,21 @@ public class Main {
 
 
 
+
+
+        trailer.stopEngine();
         trailer.openRamp(1);
         trailer.load(volvo01);
         trailer.closeRamp();
+        trailer.startEngine();
         trailer.driveVehicle();
+        trailer.stopEngine();
         trailer.openRamp(1);
         trailer.unLoad();
-        volvo01.printCoordinates();
         trailer.printCoordinates();
+        volvo01.printCoordinates();
+
+
     }
+
 }

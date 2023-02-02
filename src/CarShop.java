@@ -15,4 +15,8 @@ public class CarShop  <T extends Vehicle> implements Loadable<T>{
     public void unLoad() {
 
     }
+
+    public void showShopCars(){
+        carshopCars.size();
+    }
 }

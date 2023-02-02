@@ -168,17 +168,6 @@ public abstract class Vehicle implements Movable {
 
 
 
-    /**
-     * Metod för att köra bilen. En scanner kallar på input, vilken riktning vi vill köra.
-     * Riktningen sätts som lika med directions från ENUM. Därefter aktiveras move och
-     * gas som kör bilen i riktningen, medans metoden printCoordinates printar koordinaterna
-     * längs körsträckan så att vi ser vart bilen kör.
-     */
-
-
-
-
-
     public void driveVehicle(){
         Scanner scanner = new Scanner(System.in);
         startEngine();
@@ -189,6 +178,8 @@ public abstract class Vehicle implements Movable {
         for (double i = 0; i < distance; i += 0.1) {
             move();
             gas(1.0);
+            displayCoordinates();
+            setCoordinates();
         }
         printCoordinates();
     }
@@ -199,6 +190,10 @@ public abstract class Vehicle implements Movable {
         System.out.println("DROVE " + getModelName() + " TO: " + "X -> " + getX() + "   " + "Y -> " + getY());
     }
 
+    public void setCoordinates (){
+        setX(getX());
+        setY(getY());
+    }
 
 }
 

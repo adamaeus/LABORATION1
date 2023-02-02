@@ -55,10 +55,7 @@ public class TruckBed implements Loadable <Car> {
 
     public double x;
     public double y;
-    public void setCoordinates (){
-        setX(x);
-        setY(y);
-    }
+
     Deque<Car> loadedCars = new ArrayDeque<>();
 
 
@@ -110,7 +107,6 @@ public class TruckBed implements Loadable <Car> {
 
     public void loadHelper (Car car){
         if(isLoadable(car)) {
-            setCoordinates();
             loadCar(car);
             displayCargoInformation();
         }else{
@@ -132,8 +128,8 @@ public class TruckBed implements Loadable <Car> {
         loadedCars.pop();
         out.println("UNLOADED " + lastLoaded.getModelName() + " FROM " + getBedType());
         out.println(lastLoaded);
-        setCoordinates();
-
+        lastLoaded.setX(getX());
+        lastLoaded.setY(getY());
     }
 
 
@@ -150,6 +146,15 @@ public class TruckBed implements Loadable <Car> {
         out.println(" ");
     }
 
+
+    public void updateCoordinatesCar (double x, double y){
+        if (loadedCars.size() != 0 ){
+            for (Car car : loadedCars){
+                car.setX(x);
+                car.setY(y);
+            }
+        }
+    }
 
 
 
