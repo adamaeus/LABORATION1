@@ -3,12 +3,13 @@ import java.util.Deque;
 
 public class CarShop  <T extends Vehicle> implements Loadable<T>{
 
-    private Deque <T> carshopCars = new ArrayDeque<>();
+    private Deque <T> carShopCars = new ArrayDeque<>(20);
 
 
 
     @Override
     public void load(T car) {
+        carShopCars.add(car);
     }
 
     @Override
@@ -17,6 +18,11 @@ public class CarShop  <T extends Vehicle> implements Loadable<T>{
     }
 
     public void showShopCars(){
-        carshopCars.size();
+        carShopCars.size();
+    }
+
+
+    public String getStack(){
+        return carShopCars.toString();
     }
 }

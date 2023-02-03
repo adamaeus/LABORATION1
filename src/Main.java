@@ -29,6 +29,8 @@ public class Main {
         VolvoCarshop.load(volvo01);
 
         SaabCarshop.load(saab95);
+        SaabCarshop.load(saab95);
+        System.out.println(SaabCarshop.getStack());
 
 
 
