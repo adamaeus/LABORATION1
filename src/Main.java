@@ -22,16 +22,10 @@ public class Main {
         //trailer.openRamp(1);
 
 
-        CarShop<Volvo240> VolvoCarshop = new CarShop<>();
 
-        CarShop<Saab95> SaabCarshop = new CarShop<>();
-
-        VolvoCarshop.load(volvo01);
-
-        SaabCarshop.load(saab95);
-        SaabCarshop.load(saab95);
-        System.out.println(SaabCarshop.getStack());
-
+        CarMechanic<Volvo240> volvo240CarMechanic = new CarMechanic<>();
+        volvo240CarMechanic.loadToMechanic(volvo01);
+        volvo240CarMechanic.loadToMechanic(volvo240);
 
 
 

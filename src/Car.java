@@ -4,8 +4,6 @@ import java.awt.*;
 public class Car extends Vehicle{
 
 
-    // UPDATED 30/1.
-    // WEIGHT SET IN SUPER CONSTRUCTOR
     public Car(String modelName, int nrDoors, double enginePower, Color color) {
         super(modelName, nrDoors, enginePower, color, 700);
 
@@ -13,11 +11,37 @@ public class Car extends Vehicle{
 
 
 
+    private Truck carrier = null;
 
-    public double getX (){return x;}
-    public double getY(){return y;}
+    public void setCurrentCarrier(Truck carrier){
+        this.carrier = carrier;
+    }
 
+
+    @Override
     public double speedFactor() {
         return 0;
-    };
+    }
+
+    public double getX(){
+        if(carrier == null){
+            return x;
+        } else {
+            return carrier.getX();
+        }}
+
+
+
+
+
+    public double getY(){
+            if (carrier == null) {
+                return y;
+            } else {
+                return carrier.getY();
+            }
+        }
+
+
+
 }

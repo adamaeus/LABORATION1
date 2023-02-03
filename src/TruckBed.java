@@ -6,9 +6,10 @@ import static java.lang.System.out;
 
 
 
-public class TruckBed implements Loadable <Car> {
+public class TruckBed {
     Display truckBedDisplay = new Display();
 
+    LoadingSystems<Car> truckBedLoading = new LoadingSystems<>();
     public TruckBed(double carryCapacity, double maxAngle, String bedType) {
         this.carryCapacity = carryCapacity;
         this.maxAngle = maxAngle;
@@ -33,7 +34,7 @@ public class TruckBed implements Loadable <Car> {
     public String getBedType() {return bedType;}
 
     public double getCurrentLoad() {
-        return (currentLoad = loadedCars.size() * 700);
+        return (currentLoad = truckBedLoading.loadedStack.size() * 700);
     }
 
 
@@ -56,7 +57,6 @@ public class TruckBed implements Loadable <Car> {
     public double x;
     public double y;
 
-    Deque<Car> loadedCars = new ArrayDeque<>();
 
 
 
@@ -119,13 +119,13 @@ public class TruckBed implements Loadable <Car> {
     }
 
     public void loadCar(Car car){
-        loadedCars.push(car);
+        truckBedLoading.loadedStack.push(car);
         currentLoad = currentLoad + car.getWeight();
     }
 
     public void unLoad() {
-        Car lastLoaded = loadedCars.peek();
-        loadedCars.pop();
+        Car lastLoaded = truckBedLoading.loadedStack.peek();
+        truckBedLoading.loadedStack.pop();
         out.println("UNLOADED " + lastLoaded.getModelName() + " FROM " + getBedType());
         out.println(lastLoaded);
         lastLoaded.setX(getX());
@@ -135,26 +135,24 @@ public class TruckBed implements Loadable <Car> {
 
 
 
+    public void loadTest(Car car){
+        truckBedLoading.load(car);
+
+    }
+
+
+
     // ----------------------- DISPLAYER METHODS --------------------------\\
 
 
     public void displayCargoInformation (){
-        Car lastLoaded = loadedCars.peek();
+        Car lastLoaded = truckBedLoading.loadedStack.peek();
         out.println("LOADED " + lastLoaded.getModelName() + " to " + getBedType());
         out.println("CURRENT LOAD (KG) : " + getCurrentLoad());
-        out.println("CURRENT CARGO FOR : " + getBedType() + " " + loadedCars);
+        out.println("CURRENT CARGO FOR : " + getBedType() + " " + truckBedLoading.loadedStack);
         out.println(" ");
     }
 
-
-    public void updateCoordinatesCar (double x, double y){
-        if (loadedCars.size() != 0 ){
-            for (Car car : loadedCars){
-                car.setX(x);
-                car.setY(y);
-            }
-        }
-    }
 
 
 

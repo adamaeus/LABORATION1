@@ -37,7 +37,7 @@ public class Trailer extends Truck {
 
     public void load(Car car) {
         if (carVicinity(car)) {
-            trailerRamp.updateCoordinatesCar(getX(), getY());
+            car.setCurrentCarrier(this);
             trailerRamp.load(car);
         } else {
             System.out.println("CAR NOT IN REACH");
